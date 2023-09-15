@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import IInterface.IPerformTask;
+import IInterface.Information;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
         startIpc = findViewById(R.id.start_ipc);
         startIpc.setOnClickListener(v -> {
             try {
-                int result = mBinder.add(1, 3);
-                Toast.makeText(getApplicationContext(), "IPC result is" + result, Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Error happen" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Information information = mBinder.getInfo();
+                Toast.makeText(getApplicationContext(), "Information\n" + information.name +"\n" + information.age + "\n" + information.isSingle, Toast.LENGTH_SHORT).show();
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
             }
         });
         getRemoteProxy = findViewById(R.id.get_server_binder);

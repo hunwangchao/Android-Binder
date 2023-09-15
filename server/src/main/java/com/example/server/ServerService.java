@@ -7,14 +7,20 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import IInterface.IPerformTask;
+import IInterface.Information;
 
 
 public class ServerService extends Service {
 
     public Binder mBinder = new IPerformTask.Stub() {
+
         @Override
-        public int add(int a, int b) {
-            return a + b;
+        public Information getInfo() {
+            Information info = new Information();
+            info.age = 18;
+            info.name = "peter";
+            info.isSingle = true;
+            return info;
         }
 
         @Override
