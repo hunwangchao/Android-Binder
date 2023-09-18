@@ -1,2 +1,2 @@
 # Android-Binder
-Some Binder demo， which is used to describe how Binder implement inter-process communication
+A basic Binder demo，just Client process using the Binder to call method provider by Server Process.
